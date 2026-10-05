@@ -228,7 +228,7 @@ const Dashboard = () => {
 
                             <div className='space-y-2'>
                                 {productList && productList.length > 0 ? (
-                                    productList.slice(5, 10)
+                                    productList.slice(0,5)
                                     .map(p => (
                                         <div key={p.id} onClick={() => navigate(`/admin/products/${p.id}/manage`)} 
                                             className="grid sm:grid-cols-4 sm:gap-2 md:gap-4 items-center cursor-pointer hover:bg-gray-100 transition-colors px-2 md:px-4 py-2 border-b border-gray-300 last:border-b-0">
