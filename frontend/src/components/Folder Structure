@@ -1,0 +1,67 @@
+studio-banana-frontend/
+│
+├── public/
+│   └── brand-logo.png   // Your logo, favicon etc.
+│
+├── src/
+│   ├── assets/          // images, icons, banners
+│   │   ├── products/
+│   │   ├── banners/
+│   │   └── svg/
+│   │
+│   ├── components/      // Reusable UI components
+│   │   ├── Navbar.jsx
+│   │   ├── Footer.jsx
+│   │   ├── ProductCard.jsx
+│   │   ├── CategoryCard.jsx
+│   │   ├── Banner.jsx
+│   │   ├── Loader.jsx
+│   │   └── ProtectedRoute.jsx  // for future wholesale login
+│   │
+│   ├── pages/           // Full pages
+│   │   ├── Home.jsx
+│   │   ├── About.jsx
+│   │   ├── Contact.jsx
+│   │   ├── AllProducts.jsx
+│   │   ├── ProductDetails.jsx
+│   │   ├── WholesaleSignup.jsx
+│   │   ├── WholesaleLogin.jsx
+│   │   └── NotFound.jsx
+│   │
+│   ├── categories/      // You said your specific shirt categories
+│   │   ├── NormalSleeve.jsx
+│   │   ├── TShirts.jsx
+│   │   ├── LinenShirts.jsx
+│   │   ├── PrintedShirts.jsx
+│   │   ├── FiveSleeve.jsx
+│   │   └── FullSleeve.jsx
+│   │
+│   ├── layout/          // Page structures
+│   │   ├── MainLayout.jsx
+│   │   └── AdminLayout.jsx   // future use
+│   │
+│   ├── hooks/
+│   │   ├── useFetchProducts.js
+│   │   └── useAuth.js
+│   │
+│   ├── utils/
+│   │   ├── constants.js
+│   │   └── helpers.js
+│   │
+│   ├── context/
+│   │   ├── AuthContext.jsx
+│   │   └── CartContext.jsx   // future e-commerce usage
+│   │
+│   ├── router/
+│   │   └── AppRouter.jsx     // central routing file
+│   │
+│   ├── styles/
+│   │   ├── globals.css
+│   │   └── theme.css
+│   │
+│   ├── App.jsx
+│   └── main.jsx
+│
+├── .env
+├── package.json
+└── vite.config.js

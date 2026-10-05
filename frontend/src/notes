@@ -1,0 +1,72 @@
+
+
+
+
+
+Log In and Sign Up
+
+'new' badge for new arrival product
+
+
+class Product(models.Model):
+    name = models.CharField(max_length=200)
+    # ... other fields like category, pattern, etc. ...
+
+class ProductVariant(models.Model):
+    SIZE_CHOICES = [('S', 'Small'), ('M', 'Medium'), ('L', 'Large'), ('XL', 'Extra Large'), ('XXL', 'Double Extra Large')]
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='variants')
+    size = models.CharField(max_length=10, choices=SIZE_CHOICES)
+
+class ProductVariantSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProductVariant
+        fields = ('id', 'product', 'size')
+class ProductSerializer(serializers.ModelSerializer):
+    images = ProductImageSerializer(many=True, read_only=True)
+    sizes = ProductVariantSerializer(source='variants',many=True, read_only=True)
+
+
+    class Meta:
+        model = Product
+        fields = '__all__'
+class ProductVariantViewSet(ModelViewSet):
+    queryset = ProductVariant.objects.all()
+    serializer_class = ProductVariantSerializer
+
+router.register('product-variant', ProductVariantViewSet, basename='product-variant')
+
+const handleSizeToggle = (size) => {
+        setSelectedSizes(prev => 
+            prev.includes(size) 
+                ? prev.filter(s => s !== size) // Remove if already there
+                : [...prev, size]             // Add if not there
+        );
+    };
+const handleSubmit = async (e) => {
+        e.preventDefault();
+        setIsSubmitting(true);
+
+        try {
+            // Create the Product
+            const res = await api.post("/products/", productForm);
+            const productId = res.data.id;
+            if (selectedSizes.length > 0 && productId) {
+                // We use Promise.all to send all sizes at once
+                const sizePromises = selectedSizes.map(size => {
+                    return api.post("/product-variant/", {
+                        product: productId,
+                        size: size
+                    });
+                });
+                await Promise.all(sizePromises);
+            }
+            setProductForm(initialFormState);
+            setSelectedSizes([])
+            ...
+        };
+        {['S', 'M', 'L', 'XL', 'XXL'].map(size => (
+            <button type="button" key={size} onClick={() => handleSizeToggle(size)} 
+            className={` rounded-full! ${selectedSizes.includes(size) ? 'bg-blue-400' : 'bg-gray-400'} `}>
+                {size}
+            </button>
+        ))}
