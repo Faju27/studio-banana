@@ -264,6 +264,7 @@ const Home = () => {
 
             {/* 3. New Arrivals */}  
             {/*Swipable   */}
+            {}
             <section className='px-4 sm:px-8 lg:px-16 py-12 sm:py-18 lg:py-24'>
                 <motion.div 
                     initial="hidden"
@@ -277,7 +278,7 @@ const Home = () => {
                 </motion.div>
 
                 <div className='mt-8 sm:mt-10 lg:mt-12'>
-                    {( isNewArrivalsLoading || newArrivals.length < 0 ) ? (
+                    {( isNewArrivalsLoading || newArrivals.length < 0) ? (
                         <div className='flex overflow-x-auto no-scrollbar '>
                             <div className='flex w-full xl:w-auto mx-auto justify-start space-y-1 md:space-y-0 gap-1 sm:gap-3 lg:gap-6'>
                             {Array.from({ length: 4 }).map((_, i) => (
@@ -290,7 +291,7 @@ const Home = () => {
                             <div className='flex w-full xl:w-auto mx-auto justify-start space-y-1 md:space-y-0 gap-1 sm:gap-3 lg:gap-6'>
                             {newArrivals
                                 // .filter(p => p.is_new_arrival)
-                                // .slice(0, 5)
+                                .slice(0, 1)
                                 .map(product => (
                                     <StaggerItem key={product.id} className='w-1/2 shrink-0 max-w-56 sm:max-w-none sm:w-auto'>
                                         <ProductCard product={product} />
@@ -302,13 +303,15 @@ const Home = () => {
                     )}
 
                     {/* shows all product in products page through navigate */}
-                    <div className='flex gap-1 justify-center mt-4 md:mt-8'>
-                        {/* two ways filtering with useLocation and with window.location + URL Search params */}
-                        <p onClick={() => navigate('/products?is_new_arrival=true')} className='py-2 px-4 my-auto text-sm sm:text-base text-emerald-800 bg-white shadow shadow-emerald-800 rounded-full'>View More</p>
-                        <CgArrowTopRight 
-                            onClick={() =>  navigate('/products', { state: { showNewArrivals: true } })}
-                            className='text-white bg-emerald-800 shadow shadow-black h-9 sm:h-10 w-9 sm:w-10 p-2 rounded-full cursor-pointer'/>
-                    </div>
+                    { newArrivals.length > 0 && 
+                        <div className='flex gap-1 justify-center mt-4 md:mt-8'>
+                            {/* two ways filtering with useLocation and with window.location + URL Search params */}
+                            <p onClick={() => navigate('/products?is_new_arrival=true')} className='py-2 px-4 my-auto text-sm sm:text-base text-emerald-800 bg-white shadow shadow-emerald-800 rounded-full'>View More</p>
+                            <CgArrowTopRight 
+                                onClick={() =>  navigate('/products', { state: { showNewArrivals: true } })}
+                                className='text-white bg-emerald-800 shadow shadow-black h-9 sm:h-10 w-9 sm:w-10 p-2 rounded-full cursor-pointer'/>
+                        </div>
+                    }
                 </div>
                 
             </section>

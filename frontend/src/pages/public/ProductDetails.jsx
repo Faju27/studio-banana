@@ -495,7 +495,7 @@ const ProductDetails = () => {
                                     // .sort((a, b) => (a.category === product.category ? -1 : 1))
                                     // .slice(0,8)
                                     .map(product=> (
-                                        <div key={product.id} className='w-1/2 max-w-56 sm:max-w-none sm:w-auto shrink-0'>
+                                        <div key={product.id} className='max-w-56 sm:max-w-none sm:w-auto shrink-0'>
                                             <ProductCard product={product} />
                                         </div>
                                     ))
