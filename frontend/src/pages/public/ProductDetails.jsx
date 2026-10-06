@@ -482,7 +482,7 @@ const ProductDetails = () => {
                                 <button onClick={() => scroll2('left')} className="hidden! lg:block! text-black z-20 p-3! rounded-full!"><IoIosArrowBack size={35} /></button>
                             )}
 
-                            <div ref={scrollRef} className='flex overflow-x-auto lg:overflow-hidden gap-3 lg:gap-6 [&::-webkit-scrollbar]:hidden no-scrollbar'>
+                            <div ref={scrollRef} className='flex overflow-x-auto lg:overflow-hidden gap-3 lg:gap-6 [&::-webkit-scrollbar]:hidden no-scrollbar w-full'>
                                 {isRecommendedLoading ? (
                                     Array.from({ length: 3 }).map((_, idx) => (
                                         <ProductCardSkeleton key={idx} />
@@ -495,7 +495,7 @@ const ProductDetails = () => {
                                     // .sort((a, b) => (a.category === product.category ? -1 : 1))
                                     // .slice(0,8)
                                     .map(product=> (
-                                        <div key={product.id} className='max-w-56 sm:max-w-none sm:w-auto shrink-0'>
+                                        <div key={product.id} className='w-1/2 max-w-56 sm:max-w-none sm:w-auto shrink-0'>
                                             <ProductCard product={product} />
                                         </div>
                                     ))
