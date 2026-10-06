@@ -167,9 +167,9 @@ const AddProduct = () => {
         if (!productImage) {
             return toast("Please select a cover image!", { icon: '⚠️' });
         }
-        if (!productForm.sizes || productForm.sizes.length === 0) {
-            return toast("Please select at least one size.", { icon: '⚠️' });
-        }
+        // if (!productForm.sizes || productForm.sizes.length === 0) {
+        //     return toast("Please select at least one size.", { icon: '⚠️' });
+        // }
         if (!selectedColors || selectedColors.length === 0) {
             return toast("Please select at least one color.", { icon: '⚠️' });
         }

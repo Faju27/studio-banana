@@ -6,12 +6,25 @@ export const setAccessTokenUpdater = (callback) => {
     updateAccessToken = callback;
 };
 
-const api = axios.create({
-    baseURL: 'http://localhost:8000/api/',
-});
+// Production
+// const api = axios.create({
+//     baseURL: 'https://studio-banana.onrender.com/api/',
+// });
+
+// Local
+// const api = axios.create({
+//     baseURL: 'http://localhost:8000/api/',
+// });
+
+// port
 // const api = axios.create({
 //     baseURL: 'https://d19fhgxx-8000.inc1.devtunnels.ms/api/',
 // });
+console.log("My current Vite API URL is:", import.meta.env.VITE_API_URL);
+
+const api = axios.create({
+    baseURL: import.meta.env.VITE_API_URL,
+});
 
 let isRefreshing = false;
 let refreshPromise = null;

@@ -1,18 +1,11 @@
 import { Fragment, useEffect, useState } from 'react';
 import { useWholesaler } from '../../hooks/useWholesaler';
 import { GoPackage } from "react-icons/go";
-import {  MdOutlinePeople, MdOutlineShoppingCart, MdShoppingBasket } from "react-icons/md";
-import { FaUsers } from "react-icons/fa";
 import { useProducts } from '../../hooks/useProducts';
-import Loader from '../../components/Loader';
-import { FaZ } from 'react-icons/fa6';
+import  placeholderImage from '../../assets/PlaceholderImage.png';
 import { useOrder } from '../../hooks/useOrder';
 import { PiReceipt } from 'react-icons/pi';
-import WholesalerList from './WholesalerList';
-import Products from '../public/Products';
-import AllProducts from './AllProducts';
 import { AiOutlineDollar } from 'react-icons/ai';
-import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import { CardsSkeleton, RecentOrdersSkeleton, RecentProductsSkeleton } from '../../components/skeletons'
 

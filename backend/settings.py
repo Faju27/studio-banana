@@ -39,6 +39,7 @@ SECRET_KEY = os.environ.get(
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = True # on local
 # DEBUG = False # on render production
+# Reads DEBUG from Render env. If it can't find it (like locally), it defaults to True.
 DEBUG = os.environ.get("DEBUG", "True") == "True"
 
 
@@ -46,16 +47,22 @@ DEBUG = os.environ.get("DEBUG", "True") == "True"
 ALLOWED_HOSTS = [
     "127.0.0.1",
     "localhost",
+    ".onrender.com"
+    # "studio-banana.onrender.com" # dont need this bcz the below code already does it
 ]
 if os.environ.get("RENDER_EXTERNAL_HOSTNAME"):
-    ALLOWED_HOSTS.append(
-        os.environ["RENDER_EXTERNAL_HOSTNAME"]
-    )
+    ALLOWED_HOSTS.append(os.environ["RENDER_EXTERNAL_HOSTNAME"])
+
+AUTH_USER_MODEL = 'banana_core.User'
+
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'cloudinary',
+    'cloudinary_storage',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -68,8 +75,6 @@ INSTALLED_APPS = [
     # 'rest_framework.authtoken',
     'django_filters',
     'corsheaders',
-    'cloudinary',
-    'cloudinary_storage',
 ]
 
 MIDDLEWARE = [
@@ -83,35 +88,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-
-# CORS_ALLOW_ALL_ORIGINS = True         # for development only
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:5173",
-]
-# CORS_ALLOWED_ORIGINS = [
-#     "http://localhost:5173",
-#     "https://your-project.vercel.app",
-# ]
-
-
-
-
-# REST_FRAMEWORK = {   # Rest Auth Token
-#     'DEFAULT_AUTHENTICATION_CLASSES': [
-#         'rest_framework.authentication.TokenAuthentication', # Prioritize this
-#
-#     ],
-# }
-REST_FRAMEWORK = {      # JWT Auth Token
-    'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
-    ],
-}
-
-SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(hours=1),
-    'REFRESH_TOKEN_LIFETIME': timedelta(days=7),
-}
 
 ROOT_URLCONF = 'backend.urls'
 
@@ -177,6 +153,32 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
+# CORS_ALLOW_ALL_ORIGINS = True         # for development only
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5173", # for local preview
+    "http://localhost:4173"  # for production preview
+    'https://studio-banana-two.vercel.app/' #  for production frontend
+]
+
+
+# REST_FRAMEWORK = {   # Rest Auth Token
+#     'DEFAULT_AUTHENTICATION_CLASSES': [
+#         'rest_framework.authentication.TokenAuthentication', # Prioritize this
+#
+#     ],
+# }
+REST_FRAMEWORK = {      # JWT Auth Token
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ],
+}
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(hours=1),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=7),
+}
+
+
 # Internationalization
 # https://docs.djangoproject.com/en/6.0/topics/i18n/
 
@@ -196,21 +198,46 @@ STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
 
-
-STORAGES = {
-    "default": {
-        "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
-    },
-    "staticfiles": {
-        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
-    },
-}
-
+# local storage
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
+# production storage
+CLOUDINARY_STORAGE = {
+    "CLOUD_NAME": os.environ.get("CLOUDINARY_CLOUD_NAME"),
+    "API_KEY": os.environ.get("CLOUDINARY_API_KEY"),
+    "API_SECRET": os.environ.get("CLOUDINARY_API_SECRET"),
+}
 
-AUTH_USER_MODEL = 'banana_core.User'
+# STORAGES = {
+#     "default": {
+#         "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
+#     },
+#     "staticfiles": {
+#         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+#     },
+# }
+
+if DEBUG:
+    STORAGES = {  # for local
+        "default": {
+            "BACKEND": "django.core.files.storage.FileSystemStorage",
+        },
+        "staticfiles": {
+            "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+        },
+    }
+else:
+    STORAGES = {  # for production
+        "default": {
+            "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
+        },
+        "staticfiles": {
+            "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+        },
+    }
+
+
 
 
 
