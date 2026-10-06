@@ -277,13 +277,13 @@ class ProductColorViewSet(ModelViewSet):
 
 class CartViewSet(ModelViewSet):
     serializer_class = CartSerializer
-    queryset = Cart.objects.all()
-    # permission_classes = [IsAuthenticated]
+    # queryset = Cart.objects.all()
+    permission_classes = [IsAuthenticated]
 
-    # def get_queryset(self):
-    #     return Cart.objects.filter(
-    #         wholesaler=self.request.user.wholesaler_profile
-    #     )
+    def get_queryset(self):
+        return Cart.objects.filter(
+            wholesaler=self.request.user.wholesaler_profile
+        )
 
     def perform_create(self, serializer):
         serializer.save(
@@ -307,7 +307,7 @@ class OrderPagination(PageNumberPagination):
     max_page_size = 1000
 
 class OrderViewSet(ModelViewSet):
-    queryset = Order.objects.all()
+    # queryset = Order.objects.all()
     serializer_class = OrderSerializer
 
     pagination_class = OrderPagination
@@ -336,27 +336,27 @@ class OrderViewSet(ModelViewSet):
 
     ordering = ['-created_at']
 
-    # permission_classes = [IsAuthenticated]
-    #
-    # def get_queryset(self):
-    #     return Order.objects.filter(
-    #         wholesaler=self.request.user.wholesaler_profile
-    #     )
+    permission_classes = [IsAuthenticated]
 
-    # permission_classes = [IsAuthenticated]
-    # def get_queryset(self):
-    #     user = self.request.user
-    #
-    #     # 1. If the user is an admin or staff member, let them see All
-    #     if user.is_staff or user.is_superuser:
-    #         return Order.objects.all()
-    #
-    #     # 2. If it's a regular user, ensure they have a profile before filtering
-    #     if hasattr(user, 'wholesaler_profile'):
-    #         return Order.objects.filter(wholesaler=user.wholesaler_profile)
-    #
-    #     # 3. Fallback: Return nothing if they are authenticated but have no profile
-    #     return Order.objects.none()
+    def get_queryset(self):
+        return Order.objects.filter(
+            wholesaler=self.request.user.wholesaler_profile
+        )
+
+    permission_classes = [IsAuthenticated]
+    def get_queryset(self):
+        user = self.request.user
+
+        # 1. If the user is an admin or staff member, let them see All
+        if user.is_staff or user.is_superuser:
+            return Order.objects.all()
+
+        # 2. If it's a regular user, ensure they have a profile before filtering
+        if hasattr(user, 'wholesaler_profile'):
+            return Order.objects.filter(wholesaler=user.wholesaler_profile)
+
+        # 3. Fallback: Return nothing if they are authenticated but have no profile
+        return Order.objects.none()
 
     def create(self, request, *args, **kwargs): # used when wholesaler place order
         try:

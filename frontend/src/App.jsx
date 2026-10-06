@@ -54,7 +54,7 @@ const App = () => {
                 },
                 // for specific types
                 success: {
-                    duration: 8000,
+                    duration: 3000,
                     // icon: '🎯',
                     className: 'p-3! border border-emerald-800',
                     iconTheme: {
