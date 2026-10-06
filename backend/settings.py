@@ -225,7 +225,7 @@ if DEBUG:
         },
         "staticfiles": {
             # "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
-            "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
+            "BACKEND": "whitenoise.storage.CompressedStaticFilesStorage",
         },
     }
 else:
@@ -235,12 +235,12 @@ else:
         },
         "staticfiles": {
 #             "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
-            "BACKEND": "whitenoise.storage.CompressedStaticFilesStorage",
+            "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
         },
     }
 
 # STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
-STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
+STATICFILES_STORAGE = "django.contrib.staticfiles.storage.StaticFilesStorage"
 
 
 
