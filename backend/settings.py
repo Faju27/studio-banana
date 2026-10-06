@@ -157,7 +157,7 @@ AUTH_PASSWORD_VALIDATORS = [
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173", # for local preview
     "http://localhost:4173", # for production preview
-    'https://studio-banana-two.vercel.app/' #  for production frontend
+    'https://studio-banana-two.vercel.app' #  for production frontend
 ]
 
 
