@@ -60,8 +60,6 @@ AUTH_USER_MODEL = 'banana_core.User'
 # Application definition
 
 INSTALLED_APPS = [
-    'cloudinary',
-    'cloudinary_storage',
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -69,6 +67,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'cloudinary',
+    'cloudinary_storage',
+
+
     'banana_core',
     'rest_framework',
     'rest_framework_simplejwt',
@@ -226,7 +229,7 @@ if DEBUG:
         },
         "staticfiles": {
             # "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
-            "BACKEND": "whitenoise.storage.CompressedStaticFilesStorage",
+            "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
         },
     }
 else:
@@ -236,12 +239,12 @@ else:
         },
         "staticfiles": {
 #             "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
-            "BACKEND": "whitenoise.storage.CompressedStaticFilesStorage",
+            "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
         },
     }
 
 # STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
-STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
+STATICFILES_STORAGE = "django.contrib.staticfiles.storage.StaticFilesStorage"
 
 
 
