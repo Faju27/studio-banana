@@ -1,12 +1,14 @@
 # Studio Banana
 
-## Live Demo
+## Links
 
-Frontend: https://your-project.vercel.app
+- **Live Demo/Frontend:** https://studio-banana-two.vercel.app
 
-Backend API: https://your-project.onrender.com
+- **Backend API:** https://studio-banana.onrender.com/api/
 
-**GitHub:** ...
+- **Admin Panel:** https://studio-banana.onrender.com/admin/
+
+- **GitHub Repository:** https://github.com/Faju27/studio-banana
 
 
 ## Overview
@@ -209,9 +211,11 @@ and Razorpay.
 
 ## Screenshots
 
-### Home
+### Home-Desktop
 
 ![Home](docs/screenshots/home-desktop.png)
+
+### Home-Mobile
 ![Home](docs/screenshots/home-mobile.png)
 
 ### Products
@@ -222,10 +226,9 @@ and Razorpay.
 
 ![Product Details](docs/screenshots/product-details.png)
 
-### Cart
+### Cart-Mobile
 
-![Cart](docs/screenshots/cart-desktop.png)
-![Cart](docs/screenshots/cart-mobile.png)
+![Cart](docs/screenshots/my-cart-mobile.png)
 
 ### Checkout
 
@@ -237,11 +240,11 @@ and Razorpay.
 
 ### Track Order
 
-![Track Order](docs/screenshots/track-order.png)
+![Track Order](docs/screenshots/track-your-order.png)
 
 ### Profile
 
-![Profile](docs/screenshots/profile.png)
+![Profile](docs/screenshots/my-account.png)
 
 ### My Orders
 
@@ -265,7 +268,7 @@ and Razorpay.
 
 
 
-## Landing Page
+<!-- ## Landing Page -->
 
 <!-- ![Landing Page Animation](docs/screenshots/landing-animation.gif) -->
 
@@ -274,30 +277,124 @@ and Razorpay.
 ## Project Structure
 
 ```text
-Studio-Banana/
-├── Backend/
-├── Frontend/
+StudioBanana/
+│
+├── backend/
+├── banana_core/
+├── manage.py
+│
+├── frontend/
+│   ├── public/
+│   ├── src/
+│   │   ├── animations/
+│   │   ├── api/
+│   │   ├── assets/
+│   │   ├── components/
+│   │   ├── context/
+│   │   ├── hooks/
+│   │   ├── layouts/
+│   │   ├── pages/
+│   │   ├── router/
+│   │   ├── App.jsx
+│   │   ├── index.css
+│   │   └── main.jsx
+│   │
+│   ├── package.json
+│   ├── vite.config.js
+│   └── vercel.json
+│
 ├── docs/
 │   ├── architecture.png
 │   ├── user-flow.png
 │   ├── admin-flow.png
 │   ├── er-diagram.png
 │   └── screenshots/
-└── README.md
+│
+├── .gitignore
+├── README.md
+└── requirements.txt
 
 ```
 
+
+
 ## Installation
+
+### 1. Clone the repository
+
+git clone https://github.com/Faju27/studio-banana.git
+cd studio-banana
+
+### 2. Backend Setup
+
+python -m venv .venv
+
+# Windows
+.venv\Scripts\activate
+
+pip install -r requirements.txt
+
+python manage.py migrate
+python manage.py runserver
+
+### 3. Frontend Setup
+
+cd studio-banana/frontend
+
+npm install
+
+npm start
 
 
 
 ## Environment Variables
 
+### Backend
+SECRET_KEY=your-django-secret-key
+DEBUG=True
+> For local development, use `DEBUG=True`. Production uses `DEBUG=False`.
+
+DATABASE_URL=your-database-url
+
+CLOUDINARY_CLOUD_NAME=your-cloudinary-cloud-name
+CLOUDINARY_API_KEY=your-cloudinary-api-key
+CLOUDINARY_API_SECRET=your-cloudinary-api-secret
+
+RAZORPAY_KEY_ID=your-razorpay-key-id
+RAZORPAY_KEY_SECRET=your-razorpay-key-secret
+
+### Frontend
+
+VITE_API_URL=http://127.0.0.1:8000/api/
+
 
 
 ## Deployment
 
+### Frontend
+
+The React frontend is deployed on Vercel.
+
+### Backend
+
+The Django REST API is deployed on Render.
+
+### Database
+
+PostgreSQL is used as the production database.
+
+### Media Storage
+
+Cloudinary is used for product image storage.
+
+### Payments
+
+Razorpay is used for payment processing.
+
+### Static Files
+
+WhiteNoise is used to serve compressed static files in production.
 
 
 
-## Future Improvements
+<!-- ## Future Improvements -->
