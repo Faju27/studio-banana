@@ -222,7 +222,7 @@ class ProductViewSet(ModelViewSet):
     filterset_class = ProductFilter
 
     search_fields = ['name', 'category']    # Fields allowed to search
-    ordering_fields = ['id', 'created_at', 'name', 'price'] # Fields allowed to sort
+    ordering_fields = ['id', 'created_at', 'name', 'price', 'discount_price'] # Fields allowed to sort
     ordering = ['-id'] # ordering
 
     pagination_class = ProductPagination

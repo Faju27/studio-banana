@@ -316,14 +316,13 @@ const AddProduct = () => {
                             <div className='mt-2'>
                                 <div className="flex flex-col gap-1">
                                     <label>Available Colors</label>
-                                    <select value="" onChange={handleColor}
-                                        className="">
+                                    <select value="" onChange={handleColor} className="max-w-80">
                                         <option value="" hidden>Select or Add New Color</option>
                                         {globalColors
                                         .filter(gc => !selectedColors.some(sc => sc.name.toLowerCase() === gc.name.toLowerCase()))  // to hide already added colors
                                         .sort((a, b) => a.name.localeCompare(b.name))
                                         .map(c => (
-                                            <option key={c.name} value={c.name} >
+                                            <option key={c.name} value={c.name} style={{backgroundColor : c.hex_code,}} className='text-black'>
                                                 {c.name.toUpperCase()} — {c.hex_code.toUpperCase()}
                                             </option>
                                         ))}

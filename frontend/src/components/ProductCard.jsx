@@ -40,10 +40,10 @@ const ProductCard = ({product}) => {
                             <button onClick={() => navigate(`/products/${product.id}`)} className='btn-primary rounded-full! w-full'>View Product</button> 
                         </div> */}
                         <div className='space-x-2 mt-2'>
-                            <span className='font-semibold text-black text-sm lg:text-xl min-w-20'>${product.price}</span>
-                            {product.discount_price &&
-                                <span className='line-through font-semibold text-gray-500 text-sm lg:text-xl'>${product.discount_price}</span>
+                            {product.discount_price && 
+                                <span className='font-semibold text-black text-sm lg:text-xl min-w-20'>${product.discount_price}</span>
                             }
+                            <span className={`${!product.discount_price ? 'text-black' : 'line-through text-gray-500'} font-semibold text-sm lg:text-xl`}>${product.price}</span>
                         </div>
                     </div> 
                 </div>

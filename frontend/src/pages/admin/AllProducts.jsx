@@ -30,7 +30,7 @@ const AllProducts = () => {
         const params = new URLSearchParams(window.location.search);
         return params.get("ordering") || "";
     });
-    
+
     const [categories, setCategories] = useState([]);
     const [sleeveTypes, setSleeveTypes] = useState([]);
     const [styles, setStyles] = useState([]);
@@ -240,8 +240,8 @@ const AllProducts = () => {
                                 className="w-full bg-white border border-gray-300 p-2 rounded flex justify-between items-center cursor-pointer text-black hover:border-emerald-800 transition-colors"
                             >
                                 <span className='truncate'>
-                                    {ordering === 'price' && 'Price: Low to High'}
-                                    {ordering === '-price' && 'Price: High to Low'}
+                                    {ordering === 'discount_price' && 'Price: Low to High'}
+                                    {ordering === '-discount_price' && 'Price: High to Low'}
                                     {ordering === '-id' && 'Newest First'}
                                     {ordering === 'id' && 'Oldest First'}
                                     {ordering === 'name' && 'Name (A-Z)'}
@@ -257,8 +257,8 @@ const AllProducts = () => {
                                     
                                     <ul className="absolute top-full left-0 mt-1 w-full bg-white border border-gray-200 rounded shadow-lg overflow-hidden z-20">
                                         {[
-                                            { value: 'price', label: 'Price: Low to High' },
-                                            { value: '-price', label: 'Price: High to Low' },
+                                            { value: 'discount_price', label: 'Price: Low to High' },
+                                            { value: '-discount_price', label: 'Price: High to Low' },
                                             { value: '-id', label: 'Newest First' },
                                             { value: 'id', label: 'Oldest First' },
                                             { value: 'name', label: 'Name (A-Z)' },
@@ -428,9 +428,9 @@ const AllProducts = () => {
                             </div>
                             <div >Category</div>
                             <div>Options</div>
-                            <div onClick={() => handleSort('price')} className='flex items-center gap-1 cursor-pointer'>
+                            <div onClick={() => handleSort('discount_price')} className='flex items-center gap-1 cursor-pointer'>
                                 <span>Price</span>
-                                {ordering === 'price' ? <FaArrowUp /> : ordering === '-price' ? <FaArrowDown /> : <FaArrowsUpDown />}
+                                {ordering === 'discount_price' ? <FaArrowUp /> : ordering === '-discount_price' ? <FaArrowDown /> : <FaArrowsUpDown />}
                             </div>
                             <div>Status</div>
                             {/* <div>Actions</div> */}
