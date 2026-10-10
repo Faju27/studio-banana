@@ -291,7 +291,6 @@ const Home = () => {
                             <div className='flex w-full xl:w-auto mx-auto justify-start space-y-1 md:space-y-0 gap-1 sm:gap-3 lg:gap-6'>
                             {newArrivals
                                 // .filter(p => p.is_new_arrival)
-                                .slice(0, 1)
                                 .map(product => (
                                     <StaggerItem key={product.id} className='w-1/2 shrink-0 max-w-56 sm:max-w-none sm:w-auto'>
                                         <ProductCard product={product} />

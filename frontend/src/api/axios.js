@@ -95,8 +95,10 @@ api.interceptors.response.use(
         }
 
         // if access token expired
-        if ( error.response.status === 401 &&
-            !isLoginRequest && !isRefreshRequest && !originalRequest._retry
+        if ( error.response?.status === 401 &&
+            !isLoginRequest && 
+            !isRefreshRequest && 
+            !originalRequest._retry
         ) {
             
 
@@ -137,7 +139,7 @@ api.interceptors.response.use(
                     isRefreshing = true;
 
 
-                    refreshPromise = axios.post("http://localhost:8000/api/token/refresh/", {
+                    refreshPromise = api.post("token/refresh/", {
                         refresh : refreshToken,
                     })
                     .then((response) => {

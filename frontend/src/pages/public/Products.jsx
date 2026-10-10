@@ -21,8 +21,15 @@ const Products = () => {
     const [nextPage, setNextPage] = useState(null);
     const [prevPage, setPrevPage] = useState(null);
    
-    const [search, setSearch] = useState("");
-    const [ordering, setOrdering] = useState('')
+    // const [search, setSearch] = useState("");
+    const [search, setSearch] = useState(() => {
+        const params = new URLSearchParams(window.location.search);
+        return params.get("search") || "";
+    });
+    const [ordering, setOrdering] = useState(() => {
+        const params = new URLSearchParams(window.location.search);
+        return params.get("ordering") || ""; // for not to reorder when navigate back from details page
+    })
 
     // const [category, setCategory] = useState("");
     // const [style, setStyle] = useState("");
@@ -124,9 +131,9 @@ const Products = () => {
                 }
 
 
-            // Syncs the web browser URL string dynamically without triggering a hard page refresh
-            const nextURLQuery = window.location.pathname + '?' + params.toString();
-            window.history.replaceState(null, '', nextURLQuery);
+                // Syncs the web browser URL string dynamically without triggering a hard page refresh
+                const nextURLQuery = window.location.pathname + '?' + params.toString();
+                window.history.replaceState(null, '', nextURLQuery);
 
                 const url = `/products/?${params.toString()}`;
 

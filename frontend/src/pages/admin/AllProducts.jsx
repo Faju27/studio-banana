@@ -19,9 +19,18 @@ const AllProducts = () => {
     const [adminNext, setAdminNext] = useState(null);
     const [adminPrev, setAdminPrev] = useState(null);
 
-    const [search, setSearch] = useState("");
-    const [ordering, setOrdering] = useState("");
+    // const [search, setSearch] = useState("");
+    // const [ordering, setOrdering] = useState("");
+    const [search, setSearch] = useState(() => {
+        const params = new URLSearchParams(window.location.search);
+        return params.get("search") || "";
+    });
 
+    const [ordering, setOrdering] = useState(() => {
+        const params = new URLSearchParams(window.location.search);
+        return params.get("ordering") || "";
+    });
+    
     const [categories, setCategories] = useState([]);
     const [sleeveTypes, setSleeveTypes] = useState([]);
     const [styles, setStyles] = useState([]);
@@ -31,7 +40,12 @@ const AllProducts = () => {
     const [activeStatus, setActiveStatus] = useState("");
     const [newArrival, setNewArrival] = useState('');
 
-    const [pageSize, setPageSize] = useState(10);
+    // const [pageSize, setPageSize] = useState(10);
+    const [pageSize, setPageSize] = useState(() => {
+        const params = new URLSearchParams(window.location.search);
+        return params.get('page_size') || 10;
+    });
+
     const [totalPage, setTotalPage] = useState(0);
 
     const [totalProducts, setTotalProducts] = useState(null); // Global stats (Unchanging)
@@ -106,6 +120,10 @@ const AllProducts = () => {
             if (activeStatus) {
                 params.set("is_active", activeStatus);
             }
+
+            // Update the browser URL dynamically without reloading
+            const nextURLQuery = window.location.pathname + '?' + params.toString();
+            window.history.replaceState(null, '', nextURLQuery);
 
             const url = `/products/?${params.toString()}`;
 
